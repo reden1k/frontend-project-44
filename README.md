@@ -1,6 +1,6 @@
 ### Hexlet tests and linter status:
 [![Actions Status](https://github.com/reden1k/frontend-project-44/actions/workflows/hexlet-check.yml/badge.svg)](https://github.com/reden1k/frontend-project-44/actions)
-![Maintainability](https://codeclimate.com/github/reden1k/frontend-project-44/maintainability)
+
 
 # Brain Games
 Hello! My name is Dima and this is my first frontend project on Hexlet.
