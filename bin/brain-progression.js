@@ -9,12 +9,12 @@ export default function progressionArithmetic() {
   let count = 0;
   console.log('What number is missing in the progression?');
   for (let i = 0; i < 3; i += 1) {
-    const progressionIndex = Math.floor(Math.random() * 5 + 3);
-    const randomStart = Math.floor(Math.random() * 10); 
+    const progressionIndex = Math.floor(Math.random() * 5 + 3); // рандомная индекс прогрессии.
+    const randomStart = Math.floor(Math.random() * 10); // начальные число в прогрессии.
     const progressionLength = Math.floor(Math.random() * 5 + 5);
-    const randomSecretNumber = Math.floor(Math.random() * progressionLength); 
+    const randomSecretNumber = Math.floor(Math.random() * progressionLength); //
 
-    const progressionArray = [randomStart]; 
+    const progressionArray = [randomStart]; // пустой массив
     for (let j = 0; j < progressionLength; j += 1) {
       progressionArray.push(progressionArray[progressionArray.length - 1] + progressionIndex);
     }
