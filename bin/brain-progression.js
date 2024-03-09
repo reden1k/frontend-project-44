@@ -1,8 +1,9 @@
 #!/usr/bin/env node
 import readlineSync from 'readline-sync';
-import { start, congratulations, wrongAnswer } from '../src/cli.js';
+import { runner } from '../src/cli.js';
 
 let answer;
+const description = 'What number is missing in the progression?';
 
 function generateNums() {
   const arr = [];
@@ -22,21 +23,13 @@ function generateNums() {
 }
 
 export default function progression() {
-  start();
-  let input;
-  console.log('What number is missing in the progression?');
-  for (let i = 0; i < 3;) {
-    console.log(`Question: ${generateNums()}`);
-    input = readlineSync.question('Your answer: ');
-    if (Number(input) === answer) {
-      console.log('Correct!');
-      i += 1;
-    } else {
-      wrongAnswer(input, answer);
-      return;
-    }
+  console.log(`Question: ${generateNums()}`);
+  const input = readlineSync.question('Your answer: ');
+  if (Number(input) === answer) {
+    console.log('Correct!');
+    return true;
   }
-  congratulations();
+  return [input, answer];
 }
 
-progression();
+runner(progression, description);

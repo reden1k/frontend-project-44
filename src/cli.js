@@ -18,12 +18,12 @@ export const runner = (game, description) => {
   console.log(description);
   let count = 0;
   let result;
-  while(count !== 3 && game) {
+  while (count !== 3 && game) {
     result = game();
     if (Array.isArray(result)) {
-      return wrongAnswer(result[0], result[1])
+      return wrongAnswer(result[0], result[1]);
     }
-    count += 1; 
+    count += 1;
   }
-  congratulations();
-}
+  return congratulations();
+};
