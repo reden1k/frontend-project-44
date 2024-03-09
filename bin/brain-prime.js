@@ -12,7 +12,7 @@ function prime() {
     for (let i = 0; i < 3;) {
     const num = Math.round(Math.random() * (30 - 1) * 1)
     console.log(`Question: ${num}`)
-    answer = isPrime(num);
+    isPrime(num) ? answer = 'yes' : answer = 'no';
     input = readlineSync.question('Your answer: ');
         
         if (answer === input) {
