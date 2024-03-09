@@ -15,25 +15,18 @@ function prime() {
     answer = isPrime(num);
     input = readlineSync.question('Your answer: ');
         
-    if (answer === input) {
-        console.log(`Correct!`);
-        i += 1
-    }
-    else {
-        wrongAnswer(input, answer);
-        return;
-    }
+        if (answer === input) {
+            console.log(`Correct!`);
+            i += 1
+        }
+        else {
+            wrongAnswer(input, answer);
+            return;
+        }
     }
     congratulations();
 }
 
-function isPrime(num) {
-    for(let i = 2, s = Math.sqrt(num); i <= s; i++) {
-        if(num % i === 0) return 'no';
-    }
-    if (num >= 1) {
-        return 'yes';
-    }
-}
+const isPrime = n => ![...Array(n).keys()].slice(2).map(i => !(n%i)).includes(true) && ![0,1].includes(n)
 
 prime();
