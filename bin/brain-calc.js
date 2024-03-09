@@ -1,54 +1,58 @@
 #!/usr/bin/env node
-/* eslint-disable no-unused-vars */
+import {name} from "../src/cli.js"
 import readlineSync from 'readline-sync';
-import { name } from '../src/cli.js';
-import { welcome, congratulation } from '../src/callbacks.js';
+import start from "../src/cli.js"
 
-// eslint-disable-next-line consistent-return
-export default function calculator() {
-  welcome();
-  console.log('What is the result of the expression?');
-  let count = 0;
-  for (let i = 0; i < 3; i += 1) {
-    const value1 = Math.round(Math.random() * 100);
-    const value2 = Math.round(Math.random() * 20);
-    const randomIndex = Math.floor(Math.random() * 3);
-    const newArray = ['+', '-', '*'];
+function calc() {
+    start();
+    const array = ['+', '*', '-'];
+    for (let i = 0; i < 3;) {
+        const value1 = Math.round(Math.random() * 100);
+        const value2 = Math.round(Math.random() * 10);
+        const index = Math.round(Math.random() * 3);
+        let answer = 0;
+        if (array[index] === '-') {
+            console.log(`${value1} - ${value2}`)
+            answer = value1 - value2;
+            const input = readlineSync.question('Your answer: ')
+            if (answer === Number(input)) {
+                console.log('Correct!');
+                i += 1
+            } else {
+                console.log(`'${input}' is wrong answer ;(, Correct anwer was '${answer}' \r Let's try again, ${name}!`)    
+                return;
+            }
+        }
 
-    const check = `${value1} ${newArray[randomIndex]} ${value2}`;
+        if (array[index] === '*') {
+            console.log(`${value1} * ${value2}`)
+            answer = value1 * value2;
+            const input = readlineSync.question('Your answer: ')
+            if (answer === Number(input)) {
+                console.log('Correct!');
+                i += 1
+            }
+            else {
+                console.log(`'${input}' is wrong answer ;(, Correct anwer was '${answer}' \r Let's try again, ${name}!`)
+                return;
+            }
+        }
 
-    console.log(`Question: ${check}`);
-    const answer = readlineSync.question('Your answer: ');
-
-    if (newArray[randomIndex] === '+' && Number(answer) === value1 + value2) {
-      console.log('Correct!');
-      count += 1;
+        if (array[index] === '+') {
+            console.log(`${value1} + ${value2}`)
+            answer = value1 + value2;
+            const input = readlineSync.question('Your answer: ')
+            if (answer === Number(input)) {
+                console.log('Correct!');
+                i += 1
+            }
+            else {
+                console.log(`'${input}' is wrong answer ;(, Correct anwer was '${answer}' \r Let's try again, ${name}!`)
+                return;
+            }
+        }
     }
-
-    if (newArray[randomIndex] === '-' && Number(answer) === value1 - value2) {
-      console.log('Correct!');
-      count += 1;
-    }
-
-    if (newArray[randomIndex] === '*' && Number(answer) === value1 * value2) {
-      console.log('Correct!');
-      count += 1;
-    } else if (newArray[randomIndex] === '+' && Number(answer) !== value1 + value2) {
-      console.log(`'${answer}' is wrong answer ;(. Correct answer was '${Number(value1 + value2)}'.
-      Let's try again, ${name}!`);
-      break;
-    } else if (newArray[randomIndex] === '-' && Number(answer) !== value1 - value2) {
-      console.log(`'${answer}' is wrong answer ;(. Correct answer was '${Number(value1 - value2)}'.
-        Let's try again, ${name}!`);
-      break;
-    } else if (newArray[randomIndex] === '*' && Number(answer) !== value1 * value2) {
-      console.log(`'${answer}' is wrong answer ;(. Correct answer was '${Number(value1 * value2)}'.
-          Let's try again, ${name}!`);
-      break;
-    }
-  }
-  if (count === 3) {
-    congratulation();
-  }
+    console.log(`Congratulations, ${name}`);
 }
-calculator();
+
+calc();
