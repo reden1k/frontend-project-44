@@ -12,7 +12,7 @@ function calc() {
         const index = Math.round(Math.random() * 3);
         let answer = 0;
         if (array[index] === '-') {
-            console.log(`${value1} - ${value2}`)
+            console.log(`Question: ${value1} - ${value2}`)
             answer = value1 - value2;
             const input = readlineSync.question('Your answer: ')
             if (answer === Number(input)) {
