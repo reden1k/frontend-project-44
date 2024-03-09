@@ -26,7 +26,7 @@ function calc() {
   const array = ['+', '*', '-'];
   const value1 = Math.round(Math.random() * 100);
   const value2 = Math.round(Math.random() * 10);
-  const index = Math.round(Math.random() * (3 - 1) + 1);
+  const index = Math.round(Math.random() * (2 - 1) + 1);
 
   const exp = expression(array[index], value1, value2);
   const answer = exp[1];
