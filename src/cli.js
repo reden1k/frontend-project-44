@@ -7,4 +7,6 @@ export function start() {
     console.log(`Hello, ${name}!`)
 }
 
-export const congratulations =() => console.log(`${'Congratulations,'} ${name}!`);
+export const congratulations = () => console.log(`${'Congratulations,'} ${name}!`);
+
+export const wrongAnswer = (input, answer) => console.log(`'${input}' is wrong answer ;(. Correct answer was '${answer}' \nLet's try again, ${name}!`);
