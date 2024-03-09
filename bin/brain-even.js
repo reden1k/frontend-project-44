@@ -22,7 +22,7 @@ export function IsEven() {
             console.log('Correct!');
         }
          else {
-        console.log(`'${input}' is wrong answer ;(. Correct answer was '${answer}', \nLet's try again ${name}!`);
+        console.log(`'${input}' is wrong answer ;(. Correct answer was '${answer}' \nLet's try again, ${name}!`);
         return;
         }
     }
