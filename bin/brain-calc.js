@@ -6,6 +6,7 @@ import start from "../src/cli.js"
 function calc() {
     start();
     const array = ['+', '*', '-'];
+    console.log('What is the result of the expression?');
     for (let i = 0; i < 3;) {
         const value1 = Math.round(Math.random() * 100);
         const value2 = Math.round(Math.random() * 10);
