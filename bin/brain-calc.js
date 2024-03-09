@@ -53,7 +53,7 @@ function calc() {
             }
         }
     }
-    console.log(`Congratulations, ${name}`);
+    console.log(`Congratulations, ${name}!`);
 }
 
 calc();
