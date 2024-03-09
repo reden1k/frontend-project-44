@@ -3,16 +3,10 @@ import readlineSync from 'readline-sync';
 import { start, congratulations, wrongAnswer } from '../src/cli.js';
 
 function egcd(a, b) {
-  let v = a;
-  const v1 = b;
-  if (v === 0) return v1;
-
-  while (v1 !== 0) {
-    if (v > v1) v -= v1;
-    else v -= v1;
+  if (!b) {
+    return a;
   }
-
-  return v;
+  return egcd(b, a % b);
 }
 
 function gcd() {
