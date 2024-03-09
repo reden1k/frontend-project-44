@@ -1,57 +1,47 @@
 #!/usr/bin/env node
 import readlineSync from 'readline-sync';
-import { start, congratulations, wrongAnswer } from '../src/cli.js';
+import { runner } from '../src/cli.js';
+
+const description = 'What is the result of the expression?';
 
 function calc() {
-  start();
   const array = ['+', '*', '-'];
-  console.log('What is the result of the expression?');
-  for (let i = 0; i < 3;) {
-    const value1 = Math.round(Math.random() * 100);
-    const value2 = Math.round(Math.random() * 10);
-    const index = Math.round(Math.random() * 3);
-    let answer = 0;
-
-    if (array[index] === '-') {
-      console.log(`Question: ${value1} - ${value2}`);
-      answer = value1 - value2;
-      const input = readlineSync.question('Your answer: ');
-      if (answer === Number(input)) {
-        console.log('Correct!');
-        i += 1;
-      } else {
-        wrongAnswer(input, answer);
-        return;
-      }
-    }
-
-    if (array[index] === '*') {
-      console.log(`Question: ${value1} * ${value2}`);
-      answer = value1 * value2;
-      const input = readlineSync.question('Your answer: ');
-      if (answer === Number(input)) {
-        console.log('Correct!');
-        i += 1;
-      } else {
-        wrongAnswer(input, answer);
-        return;
-      }
-    }
-
-    if (array[index] === '+') {
-      console.log(`Question: ${value1} + ${value2}`);
-      answer = value1 + value2;
-      const input = readlineSync.question('Your answer: ');
-      if (answer === Number(input)) {
-        console.log('Correct!');
-        i += 1;
-      } else {
-        wrongAnswer(input, answer);
-        return;
-      }
+  const value1 = Math.round(Math.random() * 100);
+  const value2 = Math.round(Math.random() * 10);
+  const index = Math.round(Math.random() * 3);
+  let answer = 0;
+  let input;
+  
+  if (array[index] === '-') {
+    console.log(`Question: ${value1} - ${value2}`);
+    answer = value1 - value2;
+    input = readlineSync.question('Your answer: ');
+    if (answer === Number(input)) {
+      console.log('Correct!');
+      return true;
     }
   }
-  congratulations();
+
+  else if (array[index] === '*') {
+    console.log(`Question: ${value1} * ${value2}`);
+    answer = value1 * value2;
+    input = readlineSync.question('Your answer: ');
+    if (answer === Number(input)) {
+      console.log('Correct!');
+      return true;
+    }
+  }
+
+  else if (array[index] === '+') {
+    console.log(`Question: ${value1} + ${value2}`);
+    answer = value1 + value2;
+    input = readlineSync.question('Your answer: ');
+    if (answer === Number(input)) {
+      console.log('Correct!');
+      return true;
+    }
+  }
+  return [input, answer];
 }
 
-calc();
+runner(calc, description);
