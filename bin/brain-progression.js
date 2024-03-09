@@ -1,37 +1,41 @@
 #!/usr/bin/env node
-/* eslint-disable no-unused-vars */
+import {name} from "../src/cli.js"
 import readlineSync from 'readline-sync';
-import { name, getName } from '../src/cli.js';
-import { welcome, congratulation } from '../src/callbacks.js';
+import {start, congratulations, wrongAnswer} from "../src/cli.js";
 
-export default function progressionArithmetic() {
-  welcome();
-  let count = 0;
-  console.log('What number is missing in the progression?');
-  for (let i = 0; i < 3; i += 1) {
-    const progressionIndex = Math.floor(Math.random() * 5 + 3); // рандомная индекс прогрессии.
-    const randomStart = Math.floor(Math.random() * 10); // начальные число в прогрессии.
-    const progressionLength = Math.floor(Math.random() * 5 + 5);
-    const randomSecretNumber = Math.floor(Math.random() * progressionLength); //
+let answer;
 
-    const progressionArray = [randomStart]; // пустой массив
-    for (let j = 0; j < progressionLength; j += 1) {
-      progressionArray.push(progressionArray[progressionArray.length - 1] + progressionIndex);
+export default function progression() {
+    start();
+    let input;
+    console.log('What number is missing in the progression?');
+    for (let i = 0; i < 3;) {
+        console.log(`Question: ${generateNums()}`);
+        input = readlineSync.question('Your answer: ');
+        if (Number(input) === answer) {
+            console.log('Correct!');
+            i += 1
+        } else {
+            wrongAnswer(input, answer);
+            return;
+        }
     }
-    const correctAnswer = progressionArray.splice(randomSecretNumber, 1, '..');
-    console.log(`Question: ${progressionArray.join(' ')}`);
-    const answer = readlineSync.question('Your answer: ');
-
-    if (Number(answer) === Number(correctAnswer)) {
-      console.log('Correct!');
-      count += 1;
-    } else {
-      console.log(`'${answer}' is wrong answer ;(. Correct answer was '${correctAnswer}'.\nLet's try again, ${name}!`);
-      break;
-    }
-  }
-  if (count === 3) {
-    congratulation();
-  }
+    congratulations();
 }
-progressionArithmetic();
+
+function generateNums() {
+    const arr = [];
+    let number = Math.round(Math.random() * (40 - 1) + 1)
+    const step = Math.round(Math.random() * (10 - 2) + 2)
+    const randomSize = Math.round(Math.random() * (10 - 5) + 5)
+    const missedPlace = Math.round(Math.random() * randomSize)
+    for (let i = 0; i < randomSize; i += 1) {
+        arr[i] = number + step;
+        number += step;
+    }
+    answer = arr[missedPlace];
+    arr[missedPlace] = '..'
+    return arr.join(' ');
+}
+
+progression();

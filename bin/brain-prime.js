@@ -1,36 +1,39 @@
 #!/usr/bin/env node
-/* eslint-disable no-unused-vars */
+import {name} from "../src/cli.js"
 import readlineSync from 'readline-sync';
-import { name, getName } from '../src/cli.js';
-import { welcome, congratulation } from '../src/callbacks.js';
+import {start, congratulations, wrongAnswer} from "../src/cli.js";
 
-function isPrime(randomNumber) {
-  for (let i = 2; i < randomNumber; i += 1) {
-    if (randomNumber % i === 0) return false;
-  }
-  return randomNumber !== 1;
+let input;
+let answer = '';
+
+function prime() {
+    start();
+    console.log('Answer "yes" if given number is prime. Otherwise answer "no".')
+    for (let i = 0; i < 3;) {
+    const num = Math.round(Math.random() * (30 - 1) * 1)
+    console.log(`Question: ${num}`)
+    answer = isPrime(num);
+    input = readlineSync.question('Your answer: ');
+        
+    if (answer === input) {
+        console.log(`Correct!`);
+        i += 1
+    }
+    else {
+        wrongAnswer(input, answer);
+        return;
+    }
+    }
+    congratulations();
 }
 
-export default function isPrimeNum() {
-  welcome();
-  let countSuccess = 0;
-  for (let i = 0; i < 3; i += 1) {
-    const randomNumber = Math.floor(Math.random() * 100);
-    console.log('Answer "yes" if given number is prime. Otherwise answer "no".');
-    console.log(`Question: ${randomNumber}`);
-    const answer = readlineSync.question('Your answer: ');
-    const correctAnswer = isPrime(randomNumber) ? 'yes' : 'no';
-
-    if (answer === correctAnswer) {
-      console.log('Correct!');
-      countSuccess += 1;
-    } else {
-      console.log(`'${answer}' is wrong answer ;(. Correct answer was '${correctAnswer}'\n.Let's try again, ${name}!`);
-      break;
+function isPrime(num) {
+    for(let i = 2, s = Math.sqrt(num); i <= s; i++) {
+        if(num % i === 0) return 'no';
     }
-    if (countSuccess === 3) {
-      congratulation();
+    if (num >= 1) {
+        return 'yes';
     }
-  }
 }
-isPrimeNum();
+
+prime();

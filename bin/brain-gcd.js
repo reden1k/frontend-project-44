@@ -1,42 +1,42 @@
 #!/usr/bin/env node
-/* eslint-disable no-unused-vars */
+import {name} from "../src/cli.js"
 import readlineSync from 'readline-sync';
-import { name, getName } from '../src/cli.js';
-import { welcome, congratulation } from '../src/callbacks.js';
-// eslint-disable-next-line no-undef
+import {start, congratulations, wrongAnswer} from "../src/cli.js";
 
-function NOD(value1, value2) {
-  if (value2 > value1) {
-    return String(NOD(value2, value1));
-  }
-  if (!value2) {
-    return value1;
-  }
-  return String(NOD(value2, value1 % value2));
-}
-
-export default function nod() {
-  welcome();
-  console.log('Find the greatest common divisor of given numbers.');
-  let count = 0;
-  for (let i = 0; i < 3; i += 1) {
-    const value1 = Math.floor(Math.random() * 50);
-    const value2 = Math.floor(Math.random() * 50);
-    const check = `${value1} ${value2}`;
-    console.log(`Question: ${check}`);
-    const answer = readlineSync.question('Your answer: ');
-
-    if (answer === NOD(value1, value2)) {
-      console.log('Correct!');
-      count += 1;
-    } else {
-      console.log(`'${answer}' is wrong answer ;(. Correct answer was '${NOD(value1, value2)}'.
-      Let's try again, ${name}!`);
-      break;
+function gcd() {
+    start();
+    console.log(`Find the greatest common divisor of given numbers.`);
+    let answer;
+    let input;
+    for (let i = 0; i < 3;) {
+        const value1 = Math.round(Math.random() * 100);
+        const value2 = Math.round(Math.random() * 100);
+        answer = egcd(value1, value2);
+        console.log(`Question: ${value1} ${value2}`)
+        input = readlineSync.question('Your answer: ');
+        if (answer === Number(input)) {
+            console.log('Correct!');
+            i += 1;
+        }
+        else {
+            wrongAnswer(input, answer);
+            return;
+        }
+        congratulations();
     }
-  }
-  if (count === 3) {
-    congratulation();
-  }
 }
-nod();
+
+function egcd(a, b) {
+    if (a == 0)
+        return b;
+
+    while (b != 0) {
+        if (a > b)
+            a = a - b;
+        else
+            b = b - a;
+    }
+
+    return a;
+}
+gcd()
