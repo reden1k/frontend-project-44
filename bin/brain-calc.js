@@ -1,7 +1,7 @@
 #!/usr/bin/env node
 import {name} from "../src/cli.js"
 import readlineSync from 'readline-sync';
-import start from "../src/cli.js"
+import { start , congratulations } from "../src/cli.js"
 
 function calc() {
     start();
@@ -53,7 +53,7 @@ function calc() {
             }
         }
     }
-    console.log(`Congratulations, ${name}!`);
+    congratulations();
 }
 
 calc();

@@ -2,7 +2,7 @@
 
 import readlineSync from 'readline-sync';
 import {name} from "../src/cli.js";
-import start from "../src/cli.js";
+import {start, congratulations} from "../src/cli.js";
 
 export function IsEven() {
     start();
@@ -26,7 +26,7 @@ export function IsEven() {
         return;
         }
     }
-    console.log(`${'Congratulations,'} ${name}!`)
+    congratulations();
 }
 
 IsEven();
