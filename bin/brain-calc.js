@@ -1,7 +1,7 @@
 #!/usr/bin/env node
 import {name} from "../src/cli.js"
 import readlineSync from 'readline-sync';
-import { start , congratulations } from "../src/cli.js"
+import { start , congratulations, wrongAnswer } from "../src/cli.js"
 
 function calc() {
     start();
@@ -20,7 +20,7 @@ function calc() {
                 console.log('Correct!');
                 i += 1
             } else {
-                console.log(`'${input}' is wrong answer ;(, Correct anwer was '${answer}' \r Let's try again, ${name}!`)    
+                wrongAnswer(input, answer)  
                 return;
             }
         }
